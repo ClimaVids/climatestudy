@@ -4,6 +4,14 @@
 
 The goal is to make useful climate, weather, data-analysis and visualization tools accessible to students, researchers, educators, creators and curious users around the world.
 
+## Try the MVP
+
+The current public MVP provides a global location search, live weather analysis, 7-day outlook, map, CSV export, shareable result URLs and referral links.
+
+**Live app:** https://climavids.github.io/climatestudy/
+
+**Crypto support:** https://climavids.github.io/climatestudy/support.html
+
 ## Product vision
 
 ClimateStudy is being built as a **product-led global platform**:
@@ -16,7 +24,7 @@ A core requirement is that useful outputs can market the product themselves thro
 
 - 🔗 Public, canonical result pages
 - 📤 One-click sharing and copy-link flows
-- 🤝 Referral links and referral credits
+- 🤝 Referral links and referral attribution
 - 🧩 Embeddable charts/maps with attribution
 - 🎨 Creator-friendly image/chart exports
 - 🔎 SEO-friendly public result pages where appropriate
@@ -28,6 +36,22 @@ A core requirement is that useful outputs can market the product themselves thro
 - ₿ Non-custodial cryptocurrency payment architecture
 
 See [docs/GROWTH_ENGINE.md](docs/GROWTH_ENGINE.md) for the product-led acquisition model.
+
+## Current MVP
+
+The first public version focuses on a fast, useful loop:
+
+1. Search a location anywhere in the world.
+2. View current weather and a 7-day outlook.
+3. Inspect the location on a map.
+4. Download a simple CSV.
+5. Copy/share a canonical result URL.
+6. Generate a referral link to invite others.
+7. Optionally support the project with BTC, LTC or DOGE.
+
+The current crypto page is for **voluntary support only**. It does not yet unlock paid features automatically. Product checkout and verified fulfillment will be added later behind a secure server-side payment layer.
+
+See [docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md), [docs/MVP_STATUS.md](docs/MVP_STATUS.md) and [docs/CRYPTO_SUPPORT.md](docs/CRYPTO_SUPPORT.md).
 
 ## Planned capabilities
 
@@ -49,20 +73,6 @@ See [docs/GROWTH_ENGINE.md](docs/GROWTH_ENGINE.md) for the product-led acquisiti
 ClimateStudy is not restricted to Iran or any single country. Locations are intended to work worldwide using coordinates, international standards, localized units and time zones.
 
 The initial product language is English. Additional languages may be added later.
-
-## MVP
-
-The first end-to-end workflow is intentionally small:
-
-1. Select a global location.
-2. Choose an analysis.
-3. Generate a free useful result.
-4. Publish a shareable result URL.
-5. Share/download/embed the result.
-6. Bring the visitor back to create another free analysis.
-7. Add premium features only where they provide clear additional value.
-
-See [docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md).
 
 ## Monetization direction
 
