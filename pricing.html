@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="ClimateStudy premium analyses and research reports."><title>ClimateStudy — Premium</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="wrap support-wrap"><a class="back" href="./">← Back to ClimateStudy</a><section class="support-hero"><p class="eyebrow">PREMIUM</p><h1>Go deeper when you need more.</h1><p class="hero-copy" style="margin:18px auto 0">Free exploration stays free. Premium reports are designed for users who need deeper analysis, more structured output and research-ready results.</p></section>
+<section class="coin-grid"><article class="coin-card"><h2>Starter Report</h2><p class="muted">$1 USD equivalent</p><p>One premium location analysis with enhanced summary and downloadable research-oriented output.</p><button class="secondary checkout" data-product="starter_report">Pay with crypto →</button></article><article class="coin-card"><h2>Research Report</h2><p class="muted">$3 USD equivalent</p><p>A deeper analysis workflow designed for students, researchers and creators who need a richer result.</p><button class="primary-link checkout" data-product="research_report">Pay with crypto →</button></article><article class="coin-card"><h2>Need more?</h2><p class="muted">Coming next</p><p>API credits, creator embeds, custom reports and larger research workflows will be added after the MVP is validated.</p><a class="secondary-link" href="https://github.com/ClimaVids/climatestudy/issues" target="_blank" rel="noopener">Request a feature</a></article></section>
+<section class="note"><strong>Crypto checkout:</strong> checkout is created by the ClimateStudy backend through BTCPay Server. The backend never exposes its API key to the browser. BTC/LTC/DOGE availability depends on the configured BTCPay store wallet/payment methods.</section>
+<p class="support-footer"><a href="support.html">Voluntary support</a> · <a href="https://github.com/ClimaVids/climatestudy">Open source</a></p></main>
+<script src="api-config.js"></script><script>
+const api=(window.CLIMATESTUDY_API_BASE||'').replace(/\/$/,'');
+const getRef=()=>localStorage.getItem('climatestudy_referrer')||localStorage.getItem('climatestudy_ref_code')||null;
+document.querySelectorAll('.checkout').forEach(btn=>btn.addEventListener('click',async()=>{
+  btn.disabled=true;btn.textContent='Creating checkout…';
+  try{const r=await fetch(`${api}/api/checkout`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product:btn.dataset.product,ref:getRef(),returnUrl:location.origin+location.pathname})});const data=await r.json();if(!r.ok||!data.checkoutUrl)throw new Error(data.error||'Checkout is not configured yet.');location.href=data.checkoutUrl}catch(e){alert(e.message)}finally{btn.disabled=false;btn.textContent='Pay with crypto →'}
+}));
+</script></body></html>
