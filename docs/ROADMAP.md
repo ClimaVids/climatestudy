@@ -1,6 +1,6 @@
 # ClimateStudy Roadmap
 
-All major product-led growth mechanisms are now part of the active roadmap. They should be implemented together as a coherent growth system, while keeping the first release technically small.
+All major product-led growth mechanisms are part of the active roadmap. The first priority is to complete one reliable free workflow, then connect monetization to real usage.
 
 ## Phase 0 — Public foundation ✅
 
@@ -17,15 +17,16 @@ All major product-led growth mechanisms are now part of the active roadmap. They
 
 ## Phase 1 — Free global utility 🚧
 
-- [ ] Global location search
-- [ ] Weather and climate analysis workspace
+- [x] Global location search
+- [x] Current weather and 7-day forecast workspace
 - [ ] Basic temperature and precipitation charts
-- [ ] Interactive map view
-- [ ] Downloadable image/CSV results
-- [ ] English-first user interface
-- [ ] Public shareable result pages
-- [ ] Stable canonical result URLs
-- [ ] Mobile-friendly result pages
+- [x] Interactive map view
+- [x] Downloadable CSV results
+- [ ] Downloadable branded image results
+- [x] English-first user interface
+- [x] Public shareable result URLs
+- [x] Stable result URL parameters
+- [ ] Mobile-friendly result polish
 
 ## Phase 2 — Student, researcher and creator tools
 
@@ -40,15 +41,15 @@ All major product-led growth mechanisms are now part of the active roadmap. They
 - [ ] Creator-focused workflows
 - [ ] Map/chart explanation workflow
 
-## Phase 3 — Self-propagating growth engine
+## Phase 3 — Self-propagating growth engine 🚧
 
-- [ ] One-click sharing
-- [ ] Copy-link sharing
-- [ ] Web Share API with fallback
-- [ ] Referral links
-- [ ] Referral attribution
+- [x] One-click sharing
+- [x] Copy-link sharing
+- [x] Web Share API with fallback
+- [x] Referral links
+- [x] Referral attribution
 - [ ] Referral credits
-- [ ] Shareable result metadata / Open Graph cards
+- [ ] Shareable result metadata / Open Graph cards per result
 - [ ] Public result pages indexed for discovery where valuable
 - [ ] Creator-friendly embeds
 - [ ] Embed attribution back to ClimateStudy
@@ -56,20 +57,24 @@ All major product-led growth mechanisms are now part of the active roadmap. They
 - [ ] Lightweight product analytics
 - [ ] Privacy-conscious growth metrics
 
-## Phase 4 — Monetization
+## Phase 4 — Monetization 🚧
 
+- [x] Premium product definitions
+- [x] Paid report checkout UI
 - [ ] Premium analyses
-- [ ] Paid reports
+- [ ] Paid reports fulfillment
 - [ ] API credits
 - [ ] Research plan
 - [ ] Creator plan
 - [ ] Premium embed options
-- [ ] Voluntary support
-- [ ] Crypto checkout
-- [ ] Secure payment confirmation webhooks
-- [ ] BTC support where technically and legally appropriate
-- [ ] LTC support where technically and legally appropriate
-- [ ] DOGE support where technically and legally appropriate
+- [x] Voluntary support
+- [x] Crypto checkout backend
+- [x] Secure payment confirmation webhook logic
+- [ ] Live Cloudflare Worker deployment
+- [ ] Live D1 database migration
+- [ ] Live scoped BTCPay API key
+- [ ] Live BTCPay webhook
+- [ ] End-to-end low-value payment test
 - [ ] Payment-to-feature entitlement system
 
 ## Phase 5 — Intelligence layer
@@ -98,6 +103,15 @@ All major product-led growth mechanisms are now part of the active roadmap. They
 
 The system should prioritize genuine product value. Never manufacture GitHub activity, artificial referrals, fake reviews, or other vanity signals.
 
-## Priority rule
+## Current highest-priority launch path
 
-Implement the first complete free workflow and shareable result loop before building sophisticated billing, accounts, AI, or multi-provider infrastructure.
+1. Create the Cloudflare D1 database and replace the database ID in `worker/wrangler.toml`.
+2. Apply the D1 migration.
+3. Deploy `climatestudy-api`.
+4. Configure the four required Worker secrets.
+5. Configure a scoped BTCPay API key and webhook.
+6. Set the deployed Worker URL in `api-config.js`.
+7. Test `/api/health`, referral attribution, checkout creation, and a low-value real payment.
+8. Only after the end-to-end test passes, announce paid products publicly.
+
+The project should not claim that checkout is live until these steps are completed and verified.
