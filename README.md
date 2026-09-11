@@ -4,13 +4,30 @@
 
 The goal is to make useful climate, weather, data-analysis and visualization tools accessible to students, researchers, educators, creators and curious users around the world.
 
-## Vision
+## Product vision
 
-ClimateStudy is designed around a simple loop:
+ClimateStudy is being built as a **product-led global platform**:
 
-**Free tool → useful result → shareable page/report → new users → premium features**
+**Free tool → useful result → public share page → new user → referral/organic growth → premium value**
 
-Generated results are intended to be easy to share in classrooms, research projects, websites, social-media posts and educational channels.
+A core requirement is that useful outputs can market the product themselves through links, sharing, embeds, citations and creator reuse.
+
+## Growth features — enabled by design
+
+- 🔗 Public, canonical result pages
+- 📤 One-click sharing and copy-link flows
+- 🤝 Referral links and referral credits
+- 🧩 Embeddable charts/maps with attribution
+- 🎨 Creator-friendly image/chart exports
+- 🔎 SEO-friendly public result pages where appropriate
+- 🎓 Student and research workflows
+- 📚 Citation-friendly methodology/source metadata
+- 🌐 Global locations, units and time zones
+- 🤖 AI-assisted explanations as an enhancement layer
+- 💳 Premium analyses, reports and API access
+- ₿ Non-custodial cryptocurrency payment architecture
+
+See [docs/GROWTH_ENGINE.md](docs/GROWTH_ENGINE.md) for the product-led acquisition model.
 
 ## Planned capabilities
 
@@ -18,13 +35,13 @@ Generated results are intended to be easy to share in classrooms, research proje
 - 📊 Climate charts and trend analysis
 - 🗺️ Map-based visualization
 - 🌡️ Temperature, precipitation and anomaly analysis
-- 🌵 Drought and heat-risk indicators
+- 🌵 Drought, heat and frost-risk indicators
 - 🎓 Student and research workflows
 - 📄 Shareable reports and public result pages
 - 🔗 Referral and sharing features
 - 🧩 Embeddable visualizations for websites and blogs
 - 🤖 AI-assisted scientific explanations, where appropriate
-- 💳 Optional premium products and API access
+- 💳 Premium products and API access
 - ₿ Crypto payment support through a non-custodial payment architecture
 
 ## Global by design
@@ -33,15 +50,23 @@ ClimateStudy is not restricted to Iran or any single country. Locations are inte
 
 The initial product language is English. Additional languages may be added later.
 
-## Product philosophy
+## MVP
 
-ClimateStudy should provide meaningful free utility before asking users to pay. Premium features are intended to add value rather than block basic learning and exploration.
+The first end-to-end workflow is intentionally small:
 
-A central growth mechanism is **shareable output**: a user should be able to create a useful chart, analysis or report and share a link that naturally brings new users back to ClimateStudy.
+1. Select a global location.
+2. Choose an analysis.
+3. Generate a free useful result.
+4. Publish a shareable result URL.
+5. Share/download/embed the result.
+6. Bring the visitor back to create another free analysis.
+7. Add premium features only where they provide clear additional value.
+
+See [docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md).
 
 ## Monetization direction
 
-The project may eventually support:
+The project may support:
 
 - premium analyses and reports
 - research-oriented tools
@@ -51,29 +76,27 @@ The project may eventually support:
 - voluntary support
 - cryptocurrency payments such as Bitcoin, Litecoin and Dogecoin
 
+Crypto is a payment rail, not the product itself. ClimateStudy is not a trading or investment service.
+
 Payment infrastructure will be kept separate from public source code. **Private keys, wallet seeds, payment secrets, API credentials and webhook secrets must never be committed to this public repository.**
 
 ## Open-source and commercial boundary
 
-This repository is the public development home for the ClimateStudy project. Public code is intentionally structured so that credentials and deployment secrets remain outside the repository.
+This repository is public by design. It is intended to support transparency, collaboration, GitHub discovery, Portfolio value and real Open Source contributions.
 
-The hosted ClimateStudy service, data-provider agreements and some future commercial infrastructure may contain components or configuration that are not part of this repository.
+Public code must never contain production secrets or private customer data. Some hosted infrastructure, provider agreements, credentials and commercial implementation details may remain outside this repository.
 
-See [SECURITY.md](SECURITY.md) and [docs/MONETIZATION.md](docs/MONETIZATION.md).
+`climavids-weather` is a separate private ClimaVids infrastructure project and should not be copied wholesale into this public repository.
 
-## Project status
+## Persistent AI handoff context
 
-**Status: Early-stage / active planning and development**
+For future AI-assisted sessions, read [AI_CONTEXT.md](AI_CONTEXT.md) first. It records the durable project goal, audience, growth loops, security boundary, relationship to other ClimaVids repositories, and rules that should not need to be repeated.
 
-The repository currently contains the public project foundation. Product modules will be added incrementally and validated with automated tests before production use.
+Important architectural decisions are recorded in [docs/DECISIONS.md](docs/DECISIONS.md).
 
 ## Roadmap
 
 See [docs/ROADMAP.md](docs/ROADMAP.md).
-
-## Contributing
-
-Contributions, ideas, bug reports and educational use cases are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Security
 
