@@ -9,96 +9,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3Y7qQ0jQY7oF0l0W0d0yQ2zq0r0pM=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="wrap nav">
-      <a class="brand" href="./" aria-label="ClimateStudy home">
-        <span class="brand-mark">🌍</span>
-        <span>ClimateStudy</span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#explore">Explore</a>
-        <a href="#how">How it works</a>
-        <a href="https://github.com/ClimaVids/climatestudy" target="_blank" rel="noopener">GitHub</a>
-      </nav>
+      <a class="brand" href="./" aria-label="ClimateStudy home"><span class="brand-mark">🌍</span><span>ClimateStudy</span></a>
+      <nav aria-label="Main navigation"><a href="#explore">Explore</a><a href="#how">How it works</a><a href="https://github.com/ClimaVids/climatestudy" target="_blank" rel="noopener">GitHub</a></nav>
     </div>
   </header>
-
   <main>
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <p class="eyebrow">GLOBAL • FREE • SHAREABLE</p>
-          <h1>Climate intelligence you can <span>use and share.</span></h1>
-          <p class="hero-copy">Explore a location, get a useful weather analysis, and share the result with a public link. Built for students, researchers, educators, creators and curious people worldwide.</p>
-          <div class="search-card" id="explore">
-            <label for="locationInput">Analyze a location</label>
-            <div class="search-row">
-              <input id="locationInput" autocomplete="off" placeholder="e.g. London, Tokyo, Nairobi" />
-              <button id="searchBtn">Analyze</button>
-            </div>
-            <div id="suggestions" class="suggestions" aria-live="polite"></div>
-            <div class="search-hint">Try a city or region anywhere in the world.</div>
-          </div>
-        </div>
-        <div class="hero-orb" aria-hidden="true"><div class="orb-grid"></div><div class="orb-core">🌦️</div></div>
-      </div>
-    </section>
-
-    <section class="wrap results-section" id="results" hidden>
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">LIVE RESULT</p>
-          <h2 id="placeTitle">—</h2>
-          <p id="placeMeta" class="muted">—</p>
-        </div>
-        <div class="actions">
-          <button class="secondary" id="shareBtn">🔗 Share</button>
-          <button class="secondary" id="csvBtn">⬇ CSV</button>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <article class="metric-card"><span>Current temperature</span><strong id="currentTemp">—</strong><small id="currentCondition">—</small></article>
-        <article class="metric-card"><span>Precipitation today</span><strong id="todayRain">—</strong><small>forecast total</small></article>
-        <article class="metric-card"><span>Wind</span><strong id="currentWind">—</strong><small>10 m</small></article>
-      </div>
-
-      <div class="content-grid">
-        <article class="panel forecast-panel">
-          <div class="panel-head"><div><h3>7-day outlook</h3><p class="muted">A compact, shareable weather snapshot.</p></div></div>
-          <div id="forecast" class="forecast"></div>
-        </article>
-        <article class="panel map-panel"><div id="map"></div></article>
-      </div>
-
-      <article class="panel share-panel">
-        <div>
-          <p class="eyebrow">SHAREABLE RESULT</p>
-          <h3>Turn this result into the next visitor.</h3>
-          <p class="muted">The link is canonical to this location and keeps the ClimateStudy attribution visible for shared/embedded use.</p>
-        </div>
-        <div class="share-url-row"><input id="shareUrl" readonly /><button class="secondary" id="copyBtn">Copy link</button></div>
-      </article>
-
+    <section class="hero"><div class="wrap hero-grid"><div>
+      <p class="eyebrow">GLOBAL • FREE • SHAREABLE</p>
+      <h1>Climate intelligence you can <span>use and share.</span></h1>
+      <p class="hero-copy">Explore a location, get a useful weather analysis, and share the result with a public link. Built for students, researchers, educators, creators and curious people worldwide.</p>
+      <div class="search-card" id="explore"><label for="locationInput">Analyze a location</label><div class="search-row"><input id="locationInput" autocomplete="off" placeholder="e.g. London, Tokyo, Nairobi" /><button id="searchBtn">Analyze</button></div><div id="suggestions" class="suggestions" aria-live="polite"></div><div class="search-hint">Try a city or region anywhere in the world.</div></div>
+    </div><div class="hero-orb" aria-hidden="true"><div class="orb-grid"></div><div class="orb-core">🌦️</div></div></div></section>
+    <section class="wrap results-section" id="results" hidden><div class="section-head"><div><p class="eyebrow">LIVE RESULT</p><h2 id="placeTitle">—</h2><p id="placeMeta" class="muted">—</p></div><div class="actions"><button class="secondary" id="shareBtn">🔗 Share</button><button class="secondary" id="csvBtn">⬇ CSV</button></div></div>
+      <div class="grid-3"><article class="metric-card"><span>Current temperature</span><strong id="currentTemp">—</strong><small id="currentCondition">—</small></article><article class="metric-card"><span>Precipitation today</span><strong id="todayRain">—</strong><small>forecast total</small></article><article class="metric-card"><span>Wind</span><strong id="currentWind">—</strong><small>10 m</small></article></div>
+      <div class="content-grid"><article class="panel forecast-panel"><div class="panel-head"><div><h3>7-day outlook</h3><p class="muted">A compact, shareable weather snapshot.</p></div></div><div id="forecast" class="forecast"></div></article><article class="panel map-panel"><div id="map"></div></article></div>
+      <article class="panel share-panel"><div><p class="eyebrow">SHAREABLE RESULT</p><h3>Turn this result into the next visitor.</h3><p class="muted">The link is canonical to this location and keeps the ClimateStudy attribution visible for shared/embedded use.</p></div><div class="share-url-row"><input id="shareUrl" readonly /><button class="secondary" id="copyBtn">Copy link</button></div></article>
       <p class="attribution">Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>. ClimateStudy is an independent project by ClimaVids.</p>
     </section>
-
-    <section class="wrap info-grid" id="how">
-      <article class="info-card"><span>01</span><h3>Analyze</h3><p>Choose a location and get a useful, readable weather snapshot in seconds.</p></article>
-      <article class="info-card"><span>02</span><h3>Share</h3><p>Every result can become a public URL that can travel through social posts, classes and research workflows.</p></article>
-      <article class="info-card"><span>03</span><h3>Grow</h3><p>Public result pages, referrals and embeds are designed to bring the next user back to ClimateStudy.</p></article>
-    </section>
+    <section class="wrap info-grid" id="how"><article class="info-card"><span>01</span><h3>Analyze</h3><p>Choose a location and get a useful, readable weather snapshot in seconds.</p></article><article class="info-card"><span>02</span><h3>Share</h3><p>Every result can become a public URL that can travel through social posts, classes and research workflows.</p></article><article class="info-card"><span>03</span><h3>Grow</h3><p>Public result pages, referrals and embeds are designed to bring the next user back to ClimateStudy.</p></article></section>
   </main>
-
-  <footer class="site-footer">
-    <div class="wrap footer-row"><span>© ClimateStudy / ClimaVids</span><span><a href="https://github.com/ClimaVids/climatestudy" target="_blank" rel="noopener">Open source</a> · <a href="https://github.com/ClimaVids" target="_blank" rel="noopener">ClimaVids</a></span></div>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <footer class="site-footer"><div class="wrap footer-row"><span>© ClimateStudy / ClimaVids</span><span><a href="https://github.com/ClimaVids/climatestudy" target="_blank" rel="noopener">Open source</a> · <a href="https://github.com/ClimaVids" target="_blank" rel="noopener">ClimaVids</a></span></div></footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
