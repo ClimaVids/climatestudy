@@ -9,15 +9,6 @@ database_name = "climatestudy"
 database_id = "d1f303cd-a650-4020-9d5d-fc8bcfc81a7e"
 migrations_dir = "migrations"
 
-# Production checkout requires these Worker secrets.
-# Cloudflare will block deployment when a required secret is missing.
-[secrets]
-required = [
-  "BTCPAY_URL",
-  "BTCPAY_STORE_ID",
-  "BTCPAY_API_KEY",
-  "BTCPAY_WEBHOOK_SECRET"
-]
-
 [vars]
 # Public/non-secret configuration only.
+# BTCPay secrets will be added in Cloudflare before enabling paid checkout.
