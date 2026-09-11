@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Support ClimateStudy with BTC, LTC or DOGE." />
+  <meta name="theme-color" content="#07111f" />
+  <title>Support ClimateStudy — Crypto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .support-wrap{max-width:900px;padding:70px 0}.support-hero{text-align:center;margin-bottom:28px}.coin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.coin-card{background:rgba(14,27,45,.88);border:1px solid var(--line);border-radius:18px;padding:22px}.coin-card h2{font-size:24px;margin:0 0 8px}.address{display:block;width:100%;padding:13px 14px;border:1px solid var(--line);background:#081321;color:var(--text);border-radius:12px;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;word-break:break-all;margin:14px 0}.coin-actions{display:flex;gap:8px}.note{margin-top:22px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0a1727;color:var(--muted);font-size:13px}.back{display:inline-block;margin-bottom:30px;color:var(--accent);text-decoration:none}.support-footer{text-align:center;margin-top:34px;color:var(--muted);font-size:12px}
+    @media(max-width:760px){.coin-grid{grid-template-columns:1fr}.support-wrap{padding:45px 0 60px}}
+  </style>
+</head>
+<body>
+  <main class="wrap support-wrap">
+    <a class="back" href="./">← Back to ClimateStudy</a>
+    <section class="support-hero">
+      <p class="eyebrow">SUPPORT THE PROJECT</p>
+      <h1>Help ClimateStudy grow.</h1>
+      <p class="hero-copy" style="margin:18px auto 0">ClimateStudy is being built as a free global climate and weather utility. Voluntary crypto support helps fund data, hosting, research and future development.</p>
+    </section>
+
+    <section class="coin-grid" aria-label="Cryptocurrency support options">
+      <article class="coin-card"><h2>₿ Bitcoin</h2><p class="muted">BTC main network</p><code class="address" id="btc">bc1q4sxep3yxw84ky6mef0e0squ0wrasmmcprwlqkq</code><div class="coin-actions"><button class="secondary copy" data-target="btc">Copy</button><a class="secondary" href="bitcoin:bc1q4sxep3yxw84ky6mef0e0squ0wrasmmcprwlqkq">Open wallet</a></div></article>
+      <article class="coin-card"><h2>Ł Litecoin</h2><p class="muted">LTC main network</p><code class="address" id="ltc">ltc1qwepc5jvqc5jsz7hcz608k7gmdtqtphlrw9fj49</code><div class="coin-actions"><button class="secondary copy" data-target="ltc">Copy</button><a class="secondary" href="litecoin:ltc1qwepc5jvqc5jsz7hcz608k7gmdtqtphlrw9fj49">Open wallet</a></div></article>
+      <article class="coin-card"><h2>Ð Dogecoin</h2><p class="muted">DOGE main network</p><code class="address" id="doge">DNWqSzEfUzEDbvJ1wVTKG1q7nKPCddjTCY</code><div class="coin-actions"><button class="secondary copy" data-target="doge">Copy</button><a class="secondary" href="dogecoin:DNWqSzEfUzEDbvJ1wVTKG1q7nKPCddjTCY">Open wallet</a></div></article>
+    </section>
+
+    <div class="note"><strong>Important:</strong> these are public receive addresses only. Never send or publish a wallet seed phrase or private key. Double-check the selected network before sending funds. This page does not custody funds or process payments.</div>
+    <p class="support-footer">ClimateStudy by ClimaVids · <a href="https://github.com/ClimaVids/climatestudy">Open source</a></p>
+  </main>
+  <script>document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',async()=>{const text=document.getElementById(btn.dataset.target).textContent.trim();try{await navigator.clipboard.writeText(text);btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',1200)}catch{prompt('Copy this address:',text)}}));</script>
+</body>
+</html>
