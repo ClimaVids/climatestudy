@@ -9,7 +9,15 @@ database_name = "climatestudy"
 database_id = "REPLACE_WITH_D1_DATABASE_ID"
 migrations_dir = "migrations"
 
+# Production checkout requires these Worker secrets.
+# Cloudflare will block deployment when a required secret is missing.
+[secrets]
+required = [
+  "BTCPAY_URL",
+  "BTCPAY_STORE_ID",
+  "BTCPAY_API_KEY",
+  "BTCPAY_WEBHOOK_SECRET"
+]
+
 [vars]
 # Public/non-secret configuration only.
-# Store these as Cloudflare Worker secrets in production:
-# BTCPAY_URL, BTCPAY_STORE_ID, BTCPAY_API_KEY, BTCPAY_WEBHOOK_SECRET
