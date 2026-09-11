@@ -13,6 +13,8 @@ const shareUrl = document.getElementById('shareUrl');
 const shareBtn = document.getElementById('shareBtn');
 const copyBtn = document.getElementById('copyBtn');
 const csvBtn = document.getElementById('csvBtn');
+const refUrl = document.getElementById('refUrl');
+const refCopyBtn = document.getElementById('refCopyBtn');
 
 let selectedPlace = null;
 let weatherData = null;
@@ -20,8 +22,26 @@ let map = null;
 let marker = null;
 let searchTimer = null;
 
-const referral = new URLSearchParams(location.search).get('ref');
-if (referral) localStorage.setItem('climatestudy_ref', referral);
+const referralFromUrl = new URLSearchParams(location.search).get('ref');
+if (referralFromUrl) localStorage.setItem('climatestudy_ref', referralFromUrl);
+
+function getReferralId() {
+  let id = localStorage.getItem('climatestudy_ref_id');
+  if (!id) {
+    const seed = (globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`);
+    id = `cs-${seed.replace(/[^a-z0-9]/gi, '').slice(-10).toLowerCase()}`;
+    localStorage.setItem('climatestudy_ref_id', id);
+  }
+  return id;
+}
+
+function referralLink() {
+  const url = new URL(location.href);
+  url.search = '';
+  url.hash = '';
+  url.searchParams.set('ref', getReferralId());
+  return url.href;
+}
 
 const weatherCodes = {
   0: ['☀️', 'Clear sky'], 1: ['🌤️', 'Mainly clear'], 2: ['⛅', 'Partly cloudy'], 3: ['☁️', 'Overcast'],
@@ -33,7 +53,7 @@ const weatherCodes = {
 };
 
 function codeInfo(code) { return weatherCodes[code] || ['🌍', 'Weather']; }
-function esc(value) { return String(value ?? '').replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\\':'&#92;','"':'&quot;'}[c])); }
+function esc(value) { return String(value ?? '').replace(/[&<>\\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\\':'&#92;','"':'&quot;'}[c])); }
 function formatDate(date) { return new Intl.DateTimeFormat('en', {weekday:'short', month:'short', day:'numeric'}).format(date); }
 
 async function geocode(q) {
@@ -56,6 +76,15 @@ async function weatherFor(place) {
   const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
   if (!response.ok) throw new Error('Weather request failed');
   return response.json();
+}
+
+async function analyzeCityName(city) {
+  const items = await geocode(city);
+  if (!items.length) return;
+  suggestions.innerHTML = '';
+  selectedPlace = items[0];
+  input.value = [selectedPlace.name, selectedPlace.country].filter(Boolean).join(', ');
+  await runAnalysis(selectedPlace);
 }
 
 function renderSuggestions(items) {
@@ -84,6 +113,7 @@ async function runAnalysis(place) {
     history.replaceState({}, '', `${location.pathname}?${params.toString()}#results`);
     results.hidden = false;
     results.scrollIntoView({behavior:'smooth', block:'start'});
+    if (refUrl) refUrl.value = referralLink();
   } catch (error) {
     alert(error.message || 'Unable to load the analysis.');
   } finally {
@@ -144,12 +174,15 @@ input.addEventListener('input', () => {
   }, 450);
 });
 
+document.querySelectorAll('.quick-card').forEach(button => button.addEventListener('click', () => analyzeCityName(button.dataset.city)));
+
 shareBtn.addEventListener('click', async () => {
   const value = shareUrl.value;
   if (navigator.share) { try { await navigator.share({title:'ClimateStudy result', text:'Explore this ClimateStudy analysis', url:value}); } catch {} }
   else { await navigator.clipboard.writeText(value); alert('Share link copied.'); }
 });
 copyBtn.addEventListener('click', async () => { await navigator.clipboard.writeText(shareUrl.value); copyBtn.textContent = 'Copied!'; setTimeout(() => copyBtn.textContent = 'Copy link', 1200); });
+if (refCopyBtn) refCopyBtn.addEventListener('click', async () => { await navigator.clipboard.writeText(refUrl.value); refCopyBtn.textContent = 'Copied!'; setTimeout(() => refCopyBtn.textContent = 'Copy referral', 1200); });
 
 csvBtn.addEventListener('click', () => {
   if (!weatherData) return;
@@ -177,4 +210,6 @@ async function loadFromUrl() {
   input.value = place.name;
   await runAnalysis(place);
 }
+
+if (refUrl) refUrl.value = referralLink();
 loadFromUrl();
