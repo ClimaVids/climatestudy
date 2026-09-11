@@ -25,9 +25,9 @@ The product should support these growth loops together:
 
 1. Free useful tool → result → public share page → new visitor.
 2. Every result page contains a natural ClimateStudy attribution and a clear CTA to create another result.
-3. One-click sharing to common social platforms.
+3. One-click sharing and copy-link flows.
 4. Copy/shareable canonical URLs for reports and analyses.
-5. Referral links (`?ref=` or an equivalent server-side referral ID).
+5. Referral links (`?ref=`) with a server-side referral endpoint when the API is deployed.
 6. Referral rewards, initially as product credits rather than cash payouts.
 7. Embeddable charts/maps with attribution.
 8. Creator-friendly downloadable images and charts.
@@ -38,20 +38,30 @@ The product should support these growth loops together:
 
 ## Monetization direction
 
-Free utility comes first. Monetization should be layered behind:
+Free utility comes first. Monetization is layered behind:
 
 - premium analyses
 - advanced reports
 - research/creator workflows
 - API credits
 - embeddable/pro tools
-- referral/partner programs
+- referrals and partner programs
 - voluntary support
 - cryptocurrency checkout
 
-Crypto payment design must be non-custodial where possible. Private keys, seed phrases, wallet credentials, API keys, payment secrets, webhook secrets, and production credentials must never be committed to this public repository.
+Crypto is a payment rail for ClimateStudy digital products, not the product itself. The project is not a trading, investment, custody, or wallet-management service.
 
 Target crypto assets for the initial design: BTC, LTC, and DOGE, subject to technical/provider availability and applicable laws.
+
+## Current payment architecture
+
+- Public receive addresses are displayed only on `support.html` for voluntary support.
+- Commercial checkout is implemented server-side in `worker/src/index.js` through the BTCPay Greenfield API.
+- Product prices are server-side constants; browser input cannot override the price.
+- D1 stores referral counts and orders/invoice states.
+- BTCPay webhook signatures are validated using `BTCPay-Sig` HMAC-SHA256 before order status changes.
+- Secrets are runtime-only Worker secrets: `BTCPAY_URL`, `BTCPAY_STORE_ID`, `BTCPAY_API_KEY`, `BTCPAY_WEBHOOK_SECRET`.
+- The Worker has not been deployed/configured with real credentials yet. Do not claim that commercial checkout is live until a real Worker URL and BTCPay integration have been configured and tested.
 
 ## Product principles
 
@@ -71,20 +81,33 @@ Target crypto assets for the initial design: BTC, LTC, and DOGE, subject to tech
 `climavids-weather` is the separate core weather infrastructure project and remains private.
 ClimateStudy is the public-facing/global growth and product layer. Do not copy private implementation details or secrets from `climavids-weather` into this repository.
 
-## Initial product concept
+## Current MVP concept
 
-ClimateStudy is a global Climate & Weather Intelligence toolkit. Initial workflows include:
+ClimateStudy currently has a static frontend workflow for:
 
-- location-based weather/climate analysis
-- temperature and precipitation charts
-- anomaly and trend analysis
-- drought/heat/frost risk indicators
-- map-based visualization
-- shareable report pages
-- downloadable image/CSV/PDF results
-- map/image explanation workflows
-- student/research citation helpers
-- creator embeds
+- global location search
+- current weather snapshot
+- 7-day forecast
+- Leaflet map
+- shareable result URL
+- CSV download
+- quick-start locations
+- referral-link UI
+- premium pricing page
+- public crypto-support page
+
+The weather MVP uses Open-Meteo for the initial non-commercial audience-building stage. Provider licensing must be reviewed before commercial traffic is enabled.
+
+## Backend components
+
+- `worker/src/index.js`: referral endpoint, BTCPay invoice creation, signed webhook handling.
+- `worker/schema.sql`: canonical D1 schema reference.
+- `worker/migrations/0001_init.sql`: Wrangler D1 migration.
+- `worker/wrangler.toml`: Cloudflare Worker/D1 configuration template.
+- `worker/README.md`: deployment and secret instructions.
+- `api-config.js`: public frontend API-base configuration.
+- `growth.js`: referral code generation, attribution and backend tracking hook.
+- `pricing.html`: premium product checkout UI.
 
 ## Future product flow
 
@@ -118,4 +141,12 @@ Use environment variables / GitHub Actions Secrets / hosting provider secrets fo
 
 ## Current status
 
-The repository is in the public foundation/MVP planning stage. The next priority is implementing the first end-to-end free utility and the viral/shareable result-page loop.
+**Frontend MVP:** implemented.
+
+**Growth UI:** implemented; server-side referral tracking is coded but requires Worker deployment.
+
+**Crypto support page:** live in the repository.
+
+**Commercial crypto checkout:** backend code implemented; requires Cloudflare Worker + D1 deployment and BTCPay configuration/secrets before it is live.
+
+**Next highest-value step:** deploy/configure the Worker, connect D1, create the scoped BTCPay API key and webhook, set `api-config.js`, then run an end-to-end test purchase at a low amount before advertising the premium products.
