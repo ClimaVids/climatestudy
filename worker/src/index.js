@@ -61,6 +61,11 @@ async function trackReferral(request, env) {
   return json({ ok: true, tracked: true, event });
 }
 
+async function dbHealth(env) {
+  await env.DB.prepare('SELECT 1 AS ok').first();
+  return json({ ok: true, database: 'climatestudy' });
+}
+
 async function createCheckout(request, env) {
   if (!env.BTCPAY_URL || !env.BTCPAY_STORE_ID || !env.BTCPAY_API_KEY) {
     return json({ error: 'Crypto checkout is not configured yet.' }, 503);
@@ -154,6 +159,7 @@ export default {
     const url = new URL(request.url);
     try {
       if (url.pathname === '/api/health') return json({ ok: true, service: 'climatestudy-api' }, 200, cors);
+      if (url.pathname === '/api/db-health') return await dbHealth(env).then(r => new Response(r.body, { status: r.status, headers: { ...Object.fromEntries(r.headers), ...cors } }));
       if (url.pathname === '/api/referral' && request.method === 'POST') return await trackReferral(request, env).then(r => new Response(r.body, { status: r.status, headers: { ...Object.fromEntries(r.headers), ...cors } }));
       if (url.pathname === '/api/checkout' && request.method === 'POST') return await createCheckout(request, env).then(r => new Response(r.body, { status: r.status, headers: { ...Object.fromEntries(r.headers), ...cors } }));
       if (url.pathname === '/api/webhooks/btcpay' && request.method === 'POST') return await btcpayWebhook(request, env);
