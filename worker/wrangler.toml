@@ -1,12 +1,12 @@
-name = "climatestudy-api"
+name = "climatestudy"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
 
-# Create the D1 database first, then replace database_id with the real ID.
+# Production D1 database.
 [[d1_databases]]
 binding = "DB"
 database_name = "climatestudy"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "d1f303cd-a650-4020-9d5d-fc8bcfc81a7e"
 migrations_dir = "migrations"
 
 # Production checkout requires these Worker secrets.
