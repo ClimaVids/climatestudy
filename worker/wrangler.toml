@@ -1,0 +1,15 @@
+name = "climatestudy-api"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Create the D1 database first, then replace database_id with the real ID.
+[[d1_databases]]
+binding = "DB"
+database_name = "climatestudy"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+# Public/non-secret configuration only.
+# Store these as Cloudflare Worker secrets in production:
+# BTCPAY_URL, BTCPAY_STORE_ID, BTCPAY_API_KEY, BTCPAY_WEBHOOK_SECRET
