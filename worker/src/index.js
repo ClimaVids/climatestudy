@@ -13,6 +13,20 @@ const PRODUCT_CATALOG = {
   }
 };
 
+const DEFAULT_ALLOWED_ORIGINS = new Set([
+  'https://climavids.github.io',
+  'https://climavids.ir',
+  'https://www.climavids.ir'
+]);
+
+function allowedOrigins(env) {
+  const configured = String(env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map(value => value.trim())
+    .filter(Boolean);
+  return new Set([...DEFAULT_ALLOWED_ORIGINS, ...configured]);
+}
+
 function json(data, status = 200, extra = {}) {
   return new Response(JSON.stringify(data), {
     status,
@@ -24,14 +38,27 @@ function json(data, status = 200, extra = {}) {
   });
 }
 
-function corsHeaders(origin) {
-  const allowed = (origin || '').includes('github.io') || (origin || '').includes('climavids');
+function corsHeaders(origin, env) {
+  const allowed = allowedOrigins(env).has(origin);
   return {
-    'Access-Control-Allow-Origin': allowed ? origin : '*',
+    'Access-Control-Allow-Origin': allowed ? origin : 'null',
     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age': '86400'
+    'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin'
   };
+}
+
+function safeReturnUrl(value, env) {
+  if (typeof value !== 'string') return 'https://github.com/ClimaVids/climatestudy';
+  try {
+    const url = new URL(value);
+    if (url.protocol !== 'https:') return 'https://github.com/ClimaVids/climatestudy';
+    if (!allowedOrigins(env).has(url.origin)) return 'https://github.com/ClimaVids/climatestudy';
+    return url.href.slice(0, 500);
+  } catch {
+    return 'https://github.com/ClimaVids/climatestudy';
+  }
 }
 
 async function hmacHex(secret, body) {
@@ -76,9 +103,7 @@ async function createCheckout(request, env) {
   if (!product) return json({ error: 'Unknown product.' }, 400);
 
   const ref = safeRef(body.ref);
-  const resultUrl = typeof body.returnUrl === 'string' && /^https:\/\//.test(body.returnUrl)
-    ? body.returnUrl.slice(0, 500)
-    : 'https://github.com/ClimaVids/climatestudy';
+  const resultUrl = safeReturnUrl(body.returnUrl, env);
 
   const orderId = crypto.randomUUID();
   const payload = {
@@ -153,7 +178,7 @@ async function btcpayWebhook(request, env) {
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
-    const cors = corsHeaders(origin);
+    const cors = corsHeaders(origin, env);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
     const url = new URL(request.url);
